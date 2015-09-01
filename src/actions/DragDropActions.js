@@ -115,7 +115,7 @@ export default class DragDropActions extends Actions {
     return { targetIds, clientOffset };
   }
 
-  drop() {
+  drop(meta) {
     const monitor = this.manager.getMonitor();
     const registry = this.manager.getRegistry();
     invariant(
@@ -136,7 +136,7 @@ export default class DragDropActions extends Actions {
     targetIds.forEach((targetId, index) => {
       const target = registry.getTarget(targetId);
 
-      let dropResult = target.drop(monitor, targetId);
+      let dropResult = target.drop(monitor, targetId, meta);
       invariant(
         typeof dropResult === 'undefined' || isObject(dropResult),
         'Drop result must either be an object or undefined.'
